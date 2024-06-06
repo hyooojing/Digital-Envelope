@@ -9,6 +9,7 @@ import java.security.*;
 
 @Service
 public class EncryptManager {
+    // 암호화 후 바이트 배열
     static byte[] encrypt(byte[] data, Key key) {
         try {
             Cipher cipher = Cipher.getInstance(key.getAlgorithm());
@@ -29,63 +30,47 @@ public class EncryptManager {
         return new byte[0];
     }
 
+    // 복호화 후 바이트 배열
     public static byte[] decrypt(byte[] encryptedData, Key key) {
-        Cipher ci;
         try {
-            ci = Cipher.getInstance(key.getAlgorithm());
+            Cipher ci = Cipher.getInstance(key.getAlgorithm());
             ci.init(Cipher.DECRYPT_MODE, key);
             return ci.doFinal(encryptedData);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalBlockSizeException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (BadPaddingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvalidKeyException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return new byte[0];
     }
 
-
+    // 암호화 후 파일에 저장
     public static void encryptToFile(String fName, byte[] data, Key key) {
-        Cipher ci;
         try {
-            ci = Cipher.getInstance(key.getAlgorithm());
+            Cipher ci = Cipher.getInstance(key.getAlgorithm());
             ci.init(Cipher.ENCRYPT_MODE, key);
-            try(CipherOutputStream cos = new CipherOutputStream(new FileOutputStream(fName), ci)){
-                cos.write(data);
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        } catch (NoSuchAlgorithmException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        } catch (NoSuchPaddingException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        } catch (InvalidKeyException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
+            try (FileOutputStream fos = new FileOutputStream(fName);
+                 CipherOutputStream cos = new CipherOutputStream(fos, ci)) {
+                cos.write(data);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    // 파일 읽은 후 복호화
     public static byte[] decryptFromFile(String fname, Key key) {
-        Cipher ci;
         try {
-            ci = Cipher.getInstance(key.getAlgorithm());
+            Cipher ci = Cipher.getInstance(key.getAlgorithm());
             ci.init(Cipher.DECRYPT_MODE, key);
 
-            //3. CipherInputStream
             try(FileInputStream fis = new FileInputStream(fname);
                 CipherInputStream cis = new CipherInputStream(fis, ci);
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();){
@@ -100,10 +85,8 @@ public class EncryptManager {
                 e.printStackTrace();
             }
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
     }
-
 }

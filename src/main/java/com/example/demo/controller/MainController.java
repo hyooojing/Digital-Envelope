@@ -46,8 +46,7 @@ public class MainController {
         try {
             // 전자서명 및 암호화
             sendDataService.sendMessage(sender, receiver, msg);
-        } catch (CipherException | SigException | FileException | UnsupportedEncodingException | KeyLoadException |
-                 NoSuchAlgorithmException | SignatureException | ClassNotFoundException e) {
+        } catch (CipherException | SigException | FileException | KeyLoadException e) {
             return e.getMessage();
         }
         return "정산 요청 정보를 성공적으로 암호화했습니다.";

@@ -16,7 +16,7 @@ public class GenerateKeyManager {
     // 사용자 비밀키 생성 및 저장
     public void createSecretKey(String id) throws NoSuchAlgorithmException {
         KeyGenerator keyGen = KeyGenerator.getInstance(keyAlgorithm);
-        keyGen.init(256);
+        keyGen.init(128);
         Key key = keyGen.generateKey();
         FileManager.writeObjectToFile(id + ".key", key);
     }
@@ -31,26 +31,23 @@ public class GenerateKeyManager {
         String fName = id+".keyPair";
         KeyPairGenerator keyPairGen = null;
         keyPairGen = KeyPairGenerator.getInstance(keyPairAlgorithm);
-        keyPairGen.initialize(2048);
+        keyPairGen.initialize(1024);
         KeyPair keypair = keyPairGen.generateKeyPair();
         FileManager.writeObjectToFile(fName, keypair);
     }
 
-    // 키 페어 가져오기
-    public static KeyPair getKeyPair(String id) throws KeyLoadException {
-        String fName = id + ".keyPair";
-        KeyPair keyPair = (KeyPair) FileManager.readObjectFromFile(fName);
-        return keyPair;
-    }
-
     // 개인키 가져오기
     public static PrivateKey getPrivateKey(String id) throws KeyLoadException {
-        return getKeyPair(id).getPrivate();
+        String fName = id + ".keyPair";
+        KeyPair keyPair = (KeyPair) FileManager.readObjectFromFile(fName);
+        return keyPair.getPrivate();
     }
 
     // 공개키 가져오기
     public static PublicKey getPublicKey(String id) throws KeyLoadException {
-        return getKeyPair(id).getPublic();
+        String fName = id + ".keyPair";
+        KeyPair keyPair = (KeyPair) FileManager.readObjectFromFile(fName);
+        return keyPair.getPublic();
     }
 
     public static Key getKeyFromEncoded(byte[] encoded) {

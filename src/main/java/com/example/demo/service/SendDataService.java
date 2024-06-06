@@ -14,7 +14,7 @@ import java.security.*;
 @Service
 public class SendDataService {
     //전자봉투 생성해서 데이터 보내는 함수
-    public void sendMessage(String senderId, String receiverId, String data) throws UnsupportedEncodingException, SigException, CipherException, FileException, KeyLoadException, NoSuchAlgorithmException, SignatureException, ClassNotFoundException {
+    public void sendMessage(String senderId, String receiverId, String data) throws SigException, CipherException, FileException, KeyLoadException {
         // 전자서명 생성
         PrivateKey privateKey;
         try {
