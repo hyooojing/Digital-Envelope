@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>정산 확인</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/style/checkMsg.css">
+    <script src="/js/checkMsg.js"></script>
+</head>
+<body>
+<div class="main">
+    <span> <h3>정산 확인</h3> </span>
+    <div class="vertical-line"></div>
+    <div class="makeKey">
+        <i class="fa-solid fa-unlock"></i><br>
+        <form id="dataForm">
+            <input type="text" placeholder="요청자 id를 입력하세요" id="sender"></input><br>
+            <input type="text" placeholder="수신자 id를 입력하세요" id="receiver"></input><br>
+
+            <button type="submit" id="issueBtn">확인</button>
+        </form>
+    </div>
+    <div class="vertical-line"></div>
+    <div id="msg"></div>
+    <div id="signature"></div>
+    <button onclick="goToMainPage()">돌아가기</button>
+    <div id="result"></div>
+</div>
+</body>
+</html>

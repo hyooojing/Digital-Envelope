@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>정산 요청</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/style/sendMsg.css">
+    <script src="/js/sendMsg.js"></script>
+</head>
+<body>
+<div class="main">
+    <span> <h3>정산 요청</h3> </span>
+    <div class="vertical-line"></div>
+    <div class="makeKey">
+        <i class="fa-regular fa-message"></i><br>
+        <form id="dataForm">
+            <input type="text" placeholder="요청자 id를 입력하세요" id="sender"></input><br>
+            <input type="text" placeholder="수신자 id를 입력하세요" id="receiver"></input><br>
+            <input type="text" class="plan" placeholder="정산내용을 입력하세요" id="message"></input><br>
+
+            <button type="submit" id="issueBtn">요청하기</button>
+        </form>
+        <button onclick="goToMainPage()">돌아가기</button>
+    </div>
+    <!-- 결과 출력 -->
+    <div id="result"></div>
+</div>
+</body>
+</html>

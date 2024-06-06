@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>암호키 발급</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/style/makeKey.css">
+    <script src="/js/makeKey.js"></script>
+</head>
+<body>
+<div class="main">
+    <span> <h3>키 발급받기</h3> </span>
+    <div class="vertical-line"></div>
+    <div class="makeKey">
+        <i class="fa-solid fa-key"></i><br>
+        <form id="confirmationForm">
+            <input type="text" placeholder="id를 입력하세요" id="userId" name="userId"></input>
+            <br><br>
+            <button type="submit" id="issueBtn">발급하기</button>
+        </form>
+        <button onclick="goToMainPage()">돌아가기</button>
+    </div>
+    <!-- 결과 출력 -->
+    <div id="result"></div>
+</div>
+</body>
+</html>
