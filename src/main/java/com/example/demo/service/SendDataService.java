@@ -43,9 +43,9 @@ public class SendDataService {
         }
 
         // 전자서명 암호화
-        String fileName = senderId + receiverId + "_encryptSignature.bin";
+        String sigName = senderId + receiverId + "_encryptSignature.bin";
         //암호화한 전자서명 파일에 저장
-        EncryptManager.encryptToFile(fileName, signature, secretKey);
+        EncryptManager.encryptToFile(sigName, signature, secretKey);
 
         // 암호화에 사용한 대칭키 수신자의 publicKey로 암호화(전자봉투 생성)
         PublicKey receiverPublicKey = null;
@@ -57,9 +57,9 @@ public class SendDataService {
         }
 
         //4. 암호문과 전자봉투 묶어서 저장
-        SendData sendData = new SendData(envelope, encryptedData, fileName, senderId);
-        fileName = senderId + receiverId + ".data";
-        boolean state = FileManager.writeObjectToFile(fileName, sendData);
+        SendData sendData = new SendData(envelope, encryptedData, sigName, senderId);
+        String envelopeName = senderId + receiverId + ".data";
+        boolean state = FileManager.writeObjectToFile(envelopeName, sendData);
         if(!state){ //파일 생성 오류(전송 오류)
             throw new FileException("전자봉투 묶어서 저장하는 중 오류");
         }

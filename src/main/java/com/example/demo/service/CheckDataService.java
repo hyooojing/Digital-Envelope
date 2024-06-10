@@ -8,10 +8,8 @@ import java.security.*;
 @Service
 // 전자봉투 개봉 및 검증
 public class CheckDataService {
-    String fileName;
     SendData sendData;
     Key secretKey;
-    String plainData;
 
     // 요청 받은 정산 정보 해독
     public String decryptedData(String senderId, String receiverId) throws CipherException, KeyLoadException, SigException, FileException {
@@ -43,10 +41,13 @@ public class CheckDataService {
     }
 
     // 전자서명 검증
-   public boolean verifyData(String plainData, String sender) throws KeyLoadException, SigException {
+    public boolean verifyData(String plainData, String sender) throws KeyLoadException, SigException, CipherException {
         // 암호화된 전자서명 파일
-        fileName = sendData.getEncryptedSignFileName();
+        String fileName = sendData.getEncryptedSignFileName();
         byte[] sign = EncryptManager.decryptFromFile(fileName, secretKey);
+        if(sign.length==0){
+           throw new CipherException("원문 암호화 중 오류");
+        }
         PublicKey publicKey = GenerateKeyManager.getPublicKey(sender);
 
         if (!SigManager.verify(plainData, publicKey, sign)) {

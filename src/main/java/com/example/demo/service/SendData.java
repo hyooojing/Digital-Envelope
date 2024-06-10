@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 final class SendData implements Serializable{
     static final long serialVersionUID = 1L;
-    private byte[] envelope; //전자봉투
-    private byte[] encryptedData; //암호화한 원본 데이터
+    // 전자봉투
+    private byte[] envelope;
+    // 암호화한 원문
+    private byte[] encryptedData;
+    // 전자서명
     private String encryptedSignFileName;
-    private String senderId; //송신자 id
+    private String senderId;
 
     SendData(){}
     SendData(byte[] envelope, byte[] encryptedData, String encryptedSignFileName, String senderId) {

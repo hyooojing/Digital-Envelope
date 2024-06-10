@@ -87,6 +87,6 @@ public class EncryptManager {
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }
-        return null;
+        return new byte[0];
     }
 }
