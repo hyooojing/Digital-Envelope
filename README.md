@@ -1,6 +1,7 @@
 <2024-1 웹코드보안 전자봉투 프로젝트>
 
 localhost:8080/main.html 접속
+
 ![image](https://github.com/hyooojing/Digital-Envelope/assets/81282601/cb87e5e4-ddf0-45d4-b9d1-996f7532cf46)
 
 1. **암호키 생성** - 사용자가 입력한 id를 바탕으로 한 공개/개인/비밀키 생성
